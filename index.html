@@ -284,6 +284,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
             <a class="btn btn-primary" href="#contact">Get in touch
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <a class="btn btn-ghost" href="#work">See selected work</a>
+            <a class="btn btn-ghost" id="cvBtn" href="#" target="_blank" rel="noopener">Download CV</a>
           </div>
           <p class="meta"><span><span class="dot" aria-hidden="true"></span><span data-bind="availability"></span></span><span data-bind="location"></span></p>
         </div>
@@ -427,7 +428,7 @@ const PORTFOLIO = {
   links: [
     { label: "LinkedIn", url: "https://www.linkedin.com/in/mohamad-abas-moussa/", display: "linkedin.com/in/mohamad-abas-moussa" },
     { label: "GitHub",   url: "https://github.com/Mohamad-Moussa", display: "github.com/Mohamad-Moussa" },
-    { label: "CV",       url: "#", display: "[[PLACEHOLDER: link to your CV PDF]]", placeholder: true }
+    { label: "CV",       url: "Mohamad_Moussa_CV.pdf", display: "Mohamad_Moussa_CV.pdf (PDF)" }
   ],
 
   // categories used by the filter buttons
@@ -449,7 +450,7 @@ const PORTFOLIO = {
     },
     {
       title: "Automated Online Electric Motor Testing",
-      cats: ["power"], when: "2023–2024", role: "Capstone · team of 5 (EE, ISE, COE)",
+      cats: ["power"], when: "2023–2024", role: "Co-leader · capstone team of 5 (EE, ISE, COE)",
       summary: "Senior design project: an automated online motor-testing solution with real-time performance monitoring for power utilities.",
       metric: null,
       points: [
@@ -534,7 +535,7 @@ const PORTFOLIO = {
     { title: "Power system analysis", text: "Load flow, N-1 contingency, reactive compensation, and tap control, verified in both PowerWorld and MATLAB." },
     { title: "Forecasting and modeling", text: "Benchmarking classical and deep-learning methods against honest baselines." },
     { title: "Data to decision", text: "Star-schema models, DAX measures, and dashboards that end in a recommendation." },
-    { title: "Leading small teams", text: "Team lead on three-person studies; capstone across EE, ISE, and COE." }
+    { title: "Leading small teams", text: "Team lead on three-person studies; co-leader of a five-person capstone across EE, ISE, and COE." }
   ],
   timeline: [
     { when: "Jan 2024", title: "B.Sc. Electrical Engineering, First Honors", where: "KFUPM, Dhahran",
@@ -636,6 +637,8 @@ const PORTFOLIO = {
     try { navigator.clipboard.writeText(b.dataset.copy).then(done, fallback); } catch (_) { fallback(); }
   });
 
+  const cv = P.links.find(l => l.label === "CV");
+  if (cv && !cv.placeholder) $("#cvBtn").href = cv.url; else $("#cvBtn").hidden = true;
   $("#foot").textContent = `© ${new Date().getFullYear()} ${P.name}`;
 
   // QR + share link
