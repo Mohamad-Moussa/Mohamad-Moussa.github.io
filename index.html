@@ -3,9 +3,24 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Mohamad Moussa</title>
+<title>Mohamad Moussa · Electrical Engineer | Power Systems & Data Analytics</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Mohamad Moussa — Electrical Engineer working across power systems and data analytics.">
+<meta name="description" content="Mohamad Moussa, Electrical Engineer (KFUPM, First Honors). Power system studies, load and solar forecasting, and Power BI dashboards. Based in Dammam, Saudi Arabia.">
+<link rel="canonical" href="https://mohamad-moussa.github.io/">
+<meta name="theme-color" content="#0C6B5A">
+<meta name="author" content="Mohamad Moussa">
+<meta property="og:type" content="profile">
+<meta property="og:site_name" content="Mohamad Moussa">
+<meta property="og:url" content="https://mohamad-moussa.github.io/">
+<meta property="og:title" content="Mohamad Moussa · Electrical Engineer">
+<meta property="og:description" content="Power system studies, forecasting, and Power BI dashboards. KFUPM, First Honors. Based in Dammam, Saudi Arabia.">
+<meta property="og:image" content="https://mohamad-moussa.github.io/images/og-preview.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="Mohamad Moussa, Electrical Engineer: Power Systems and Data Analytics">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="images/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@112,600;112,800&family=Public+Sans:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -462,7 +477,7 @@ const PORTFOLIO = {
     },
     {
       title: "Load Forecasting of Saudi National Demand",
-      cats: ["power", "ml"], when: "2023", role: "Team lead · 3 members",
+      cats: ["power", "ml"], when: "2023", role: "Team leader · 3 members · EE467 course project",
       summary: "Compared seven forecasting methods on hourly national electricity demand data.",
       metric: { value: "0.69%", label: "MAPD from a same-weekday naïve baseline; weighted hourly moving average reached 1.65%" },
       points: [
@@ -573,9 +588,8 @@ const PORTFOLIO = {
 
   // Projects + filters
   const arrow = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>';
-  const link = l => l.placeholder
-    ? `<a href="${esc(l.url)}" ${l.url !== "#" ? 'target="_blank" rel="noopener"' : ""}>${esc(l.label)} ${arrow}</a><span class="ph-tag">Placeholder</span>`
-    : `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ${arrow}</a>`;
+  // Links marked placeholder: true are hidden on the live site until you add a real URL.
+  const link = l => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ${arrow}</a>`;
   const shot = (p, i) => {
     if (!p.gallery || !p.gallery.length) return "";
     const g = p.gallery[0];
@@ -593,7 +607,7 @@ const PORTFOLIO = {
       ${p.metric ? `<div class="metric"><b>${esc(p.metric.value)}</b><span>${txt(p.metric.label)}</span></div>` : ""}
       <ul>${p.points.map(x => `<li>${txt(x)}</li>`).join("")}</ul>
       <div class="tools">${p.tools.map(t => `<span class="tag">${esc(t)}</span>`).join("")}</div>
-      <div class="card-links">${p.links.length ? p.links.map(link).join("") : '<span class="na">Details on request</span>'}</div>
+      <div class="card-links">${(L => L.length ? L.map(link).join("") : `<a class="na" href="mailto:${esc(P.email)}?subject=${encodeURIComponent(p.title)}">Report available on request</a>`)(p.links.filter(l => !l.placeholder))}</div>
     </article>`).join("");
 
   const counts = { all: P.projects.length };
@@ -625,7 +639,7 @@ const PORTFOLIO = {
   const rows = [
     { k: "Email", v: P.email, href: "mailto:" + P.email, copy: P.email },
     { k: "Phone", v: P.phone, href: "tel:" + P.phone.replace(/\s/g, ""), copy: P.phone },
-    ...P.links.map(l => ({ k: l.label, v: l.display, href: l.url, ext: true, ph: l.placeholder }))
+    ...P.links.map(l => ({ k: l.label, v: l.display, href: l.url, ext: true, ph: l.placeholder })).filter(r => !r.ph)
   ];
   $("#contactList").innerHTML = rows.map((r, i) => `<li><span class="k">${esc(r.k)}</span>
     <a class="v" href="${esc(r.href)}" ${r.ext && r.href !== "#" ? 'target="_blank" rel="noopener"' : ""}>${txt(r.v)}</a>
